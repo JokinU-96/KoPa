@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rectangulo"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ListFragment">
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="@color/yellow"
+    android:padding="10dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/bebida"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Nombre de la bebida"/>
+    <Button
+        android:id="@+id/editarBebida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:text="Editar"
+        android:textColor="#4B4B4B" />
+    <Button
+        android:id="@+id/anyadirBebida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:text="Añadir"
+        android:textColor="#4B4B4B" />
 
-</FrameLayout>
+</LinearLayout>
