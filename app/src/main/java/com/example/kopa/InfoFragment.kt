@@ -6,14 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.kopa.databinding.FragmentLoginBinding
+import com.example.kopa.databinding.FragmentInfoBinding
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
-class LogInFragment : Fragment() {
-
-    private var _binding: FragmentLoginBinding? = null
+class InfoFragment : Fragment() {
+    private var _binding: FragmentInfoBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,7 +20,7 @@ class LogInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentInfoBinding.inflate(inflater, container, false)
         return binding.root
 
     }
