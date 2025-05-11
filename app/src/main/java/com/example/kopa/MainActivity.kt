@@ -9,12 +9,17 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import com.example.kopa.databinding.ActivityMainBinding
+import com.example.kopa.modelo.VM
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    //Introduzco el ViewModel para que los datos se guarden en caché.
+    val miViewModel : VM by viewModels()
 
     //Aquí van los datos globales de la aplicación.
     var bebida:String? = null

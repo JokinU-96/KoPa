@@ -11,7 +11,9 @@ import android.view.ViewGroup
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kopa.databinding.FragmentListBinding
+import com.example.kopa.recyclerView.Adaptador
 
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
@@ -32,6 +34,10 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Añado la recycler view al fragmento.
+        binding.Bebidas.layoutManager = LinearLayoutManager(context)
+        binding.Bebidas.adapter = Adaptador ((activity as MainActivity).miViewModel.bebidas)
 
 
         //Añado un menú personalizado para la pantalla de la lista de bebidas.
