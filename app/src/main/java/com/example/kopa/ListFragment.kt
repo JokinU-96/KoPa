@@ -36,8 +36,8 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Añado la recycler view al fragmento.
-        binding.Bebidas.layoutManager = LinearLayoutManager(context)
-        binding.Bebidas.adapter = Adaptador ((activity as MainActivity).miViewModel.bebidas)
+        binding.rvbebidas.layoutManager = LinearLayoutManager(context)
+        binding.rvbebidas.adapter = Adaptador ((activity as MainActivity).miViewModel.bebidas)
 
 
         //Añado un menú personalizado para la pantalla de la lista de bebidas.

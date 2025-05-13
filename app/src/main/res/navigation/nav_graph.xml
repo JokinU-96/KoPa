@@ -3,26 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+    app:startDestination="@id/dataFragment">
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.kopa.`Log-In`"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_login">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/dataFragment"
         android:name="com.example.kopa.DataFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_data">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        android:label="fragment_data"
+        tools:layout="@layout/fragment_data" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.kopa.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.kopa.LogInFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.kopa.ListFragment"
+        android:label="ListFragment" />
 </navigation>

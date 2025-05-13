@@ -9,7 +9,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.kopa.databinding.FragmentDataBinding
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ *  Para mostrar los datos de la aplicación,
+ *  algo similar a un panel de control o un escritorio de un pc.
+ *  Se muestran las bebidas que se están consumiendo en el momento,
+ *  la hora a la que se empieza a consumir alcohol y las alertas o
+ *  notificaciones.
  */
 class DataFragment : Fragment() {
 
@@ -32,9 +36,6 @@ class DataFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }
     }
 
     override fun onDestroyView() {

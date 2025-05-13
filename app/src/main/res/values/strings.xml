@@ -48,4 +48,7 @@
     <string name="nombre_de_la_bebida">Nombre de la bebida</string>
     <string name="editar">Editar</string>
     <string name="anyadir">Añadir</string>
+    <string name="establecer_hora">Establecer hora</string>
+    <string name="suma">Suma</string>
+    <string name="comida">Comida</string>
 </resources>
