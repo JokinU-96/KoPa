@@ -5,5 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LogInFragment">
+    <!--
+    Se muestran campos de datos rellenables
+    para verificar la identidad y la mayoría de edad del usuario.
+    -->
 
 </androidx.core.widget.NestedScrollView>

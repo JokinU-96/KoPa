@@ -1,5 +1,7 @@
 package com.example.kopa
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import com.example.kopa.databinding.ActivityMainBinding
+import com.example.kopa.modelo.Usuario
 import com.example.kopa.modelo.VM
 
 class MainActivity : AppCompatActivity() {
@@ -24,8 +27,24 @@ class MainActivity : AppCompatActivity() {
     //Aquí van los datos globales de la aplicación.
     var bebida:String? = null
 
+    //Para que los datos de usuario persistan incluso despues de apagar y encender el dispositivo.
+    lateinit var datos : SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //cargo los datos persistentes por si los hubiera.
+        datos = this.getSharedPreferences("datos", Context.MODE_PRIVATE)
+
+        //en caso de que los campos del usuario estén llenos, se añaden al ViewModel.
+        datos.getString("nombre", "")
+            ?.let{nombre ->
+                datos.getString("apellido", "")?.let{
+                        apellido ->
+                    val usuario = Usuario(datos.getString("nombre", "").toString(), datos.getString("apellidos", "").toString(), datos.getInt("edad", 0))
+                    miViewModel.usuario = usuario
+                }
+            }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

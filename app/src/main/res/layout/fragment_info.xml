@@ -4,5 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InfoFragment">
+    <!--
+    Se muestran los datos de cada tipo de formato de
+    bebida y se permite su edición o borrado.
+    -->
 
 </FrameLayout>
