@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity() {
 
         //Cuando se abre la app por primera vez, se cargan todas las bebidas en la lista de bebidas del VM .
         miViewModel.insertarBebidas()
+        miViewModel.insertarColores()
+
+        setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)//Para que la flecha de Volver no aparezca en la pantalla principal.

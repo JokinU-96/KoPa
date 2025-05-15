@@ -4,29 +4,44 @@
     android:id="@+id/rectangulo"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_margin="10dp"
     android:background="@color/yellow"
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/bebida"
+        android:id="@+id/tvBebida"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:layout_weight="1"
-        android:hint="@string/nombre_de_la_bebida"/>
+        android:fontFamily="sans-serif-black"
+        android:hint="Nombre"
+        android:textSize="34sp" />
+
     <Button
-        android:id="@+id/editarBebida"
+        android:id="@+id/btnVerBebida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="15dp"
         android:backgroundTint="#FFFFFF"
-        android:text="@string/editar"
-        android:textColor="#4B4B4B" />
+        android:text="@string/ver"
+        android:textColor="#4B4B4B"
+        android:textSize="34sp" />
+
     <Button
         android:id="@+id/anyadirBebida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
-        android:text="@string/anyadir"
-        android:textColor="#4B4B4B" />
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/red"
+        android:fontFamily="sans-serif-black"
+        android:text="+"
+        android:textColor="@color/white"
+        android:textSize="34sp" />
 
 </LinearLayout>

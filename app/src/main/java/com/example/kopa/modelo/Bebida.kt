@@ -18,4 +18,5 @@ class Bebida (
     var casa : Int,
     var aviso : Int,
     var muerte : Int,
+    var color : String
 )

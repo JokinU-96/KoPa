@@ -51,4 +51,8 @@
     <string name="establecer_hora">Establecer hora</string>
     <string name="suma">Suma</string>
     <string name="comida">Comida</string>
+    <string name="nombre">Nombre:</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="iniciar_sesi_n">Iniciar sesión</string>
+    <string name="ver">Ver</string>
 </resources>
