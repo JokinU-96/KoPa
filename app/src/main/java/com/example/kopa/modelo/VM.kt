@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.room.Entity
+import com.example.kopa.bbdd.Bebida
 import com.example.kopa.bbdd.Repositorio
 import kotlinx.coroutines.launch
 

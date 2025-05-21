@@ -4,10 +4,9 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kopa.databinding.RecyclerviewProgresoBinding
-import com.example.kopa.modelo.Bebida
+import com.example.kopa.bbdd.Bebida
 
 class AdaptadorProgreso(var listaProgreso : MutableList<Bebida>): RecyclerView.Adapter<AdaptadorProgreso.ProgresoVH>() {
     inner class ProgresoVH(val binding: RecyclerviewProgresoBinding): RecyclerView.ViewHolder(binding.root){

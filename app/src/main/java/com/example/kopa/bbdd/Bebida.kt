@@ -1,4 +1,4 @@
-package com.example.kopa.modelo
+package com.example.kopa.bbdd
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo

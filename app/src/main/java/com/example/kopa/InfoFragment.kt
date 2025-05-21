@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.kopa.databinding.FragmentInfoBinding
-import com.example.kopa.modelo.Bebida
+import com.example.kopa.bbdd.Bebida
 
 class InfoFragment : Fragment() {
     private var _binding: FragmentInfoBinding? = null
@@ -29,7 +29,6 @@ class InfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Voy a mostrar los datos de cada bebida, volumen y cantidades de consumo límites.
-
         var posicion = arguments?.getInt("posicion") ?: -1
         var bebida = (activity as MainActivity).miViewModel.bebidas[0]
 
@@ -37,7 +36,6 @@ class InfoFragment : Fragment() {
         if (posicion == -1) findNavController().popBackStack()
         else{
             //sino, cargo los datos de la bebida.
-
             bebida = (activity as MainActivity).miViewModel.bebidas[posicion]
             binding.etNombre.setText(bebida.nombre);
             binding.etVolumen.setText(bebida.cantidad.toString());
@@ -55,7 +53,7 @@ class InfoFragment : Fragment() {
     }
 
     fun sumarProgreso(bebida: Bebida){
-        var bebidaConsumida:Bebida = Bebida(bebida.nombre , bebida.cantidad , bebida.vaso , bebida.comida , bebida.casa , bebida.aviso , bebida.muerte, bebida.color , bebida.consumido)
+        var bebidaConsumida: Bebida = Bebida(bebida.nombre , bebida.cantidad , bebida.vaso , bebida.comida , bebida.casa , bebida.aviso , bebida.muerte, bebida.color , bebida.consumido)
 
         (activity as MainActivity).miViewModel.progreso.add(bebidaConsumida)
 

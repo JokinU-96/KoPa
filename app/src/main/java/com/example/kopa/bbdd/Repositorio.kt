@@ -1,7 +1,6 @@
 package com.example.kopa.bbdd
 
 import androidx.annotation.WorkerThread
-import com.example.kopa.modelo.Bebida
 import kotlinx.coroutines.flow.Flow
 
 class Repositorio (val miDAO: BebidaDAO) {
