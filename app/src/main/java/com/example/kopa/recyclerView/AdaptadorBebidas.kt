@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kopa.ListFragment
+import com.example.kopa.MainActivity
 import com.example.kopa.R
-import com.example.kopa.databinding.FragmentListBinding
 import com.example.kopa.databinding.RecyclerviewBebidaBinding
 import com.example.kopa.modelo.Bebida
 
-class Adaptador(var listaDEbebidas: MutableList<Bebida>):RecyclerView.Adapter<Adaptador.BebidaVH>() {
+class AdaptadorBebidas(var listaDEbebidas: MutableList<Bebida>):RecyclerView.Adapter<AdaptadorBebidas.BebidaVH>() {
     inner class BebidaVH(val binding: RecyclerviewBebidaBinding): RecyclerView.ViewHolder(binding.root){
         var posicion: Int = 0
         init {

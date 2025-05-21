@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kopa.databinding.FragmentDataBinding
+import com.example.kopa.recyclerView.AdaptadorProgreso
 
 /**
  *  Para mostrar los datos de la aplicación,
@@ -48,6 +50,9 @@ class DataFragment : Fragment() {
 
         //La idea es construir dentro de un linear layout una recycler view nueva que
         //se alimente de todas las bebidas que lleva consumiendo el usuario durante cada sesión de bebercio.
+        /*Añado la recycler view*/
+        binding.rvProgreso.layoutManager = LinearLayoutManager(context)
+        binding.rvProgreso.adapter = AdaptadorProgreso ((activity as MainActivity).miViewModel.progreso)
 
 
         //Defino la acción del botón +.

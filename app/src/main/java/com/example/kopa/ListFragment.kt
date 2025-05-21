@@ -8,13 +8,13 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kopa.databinding.FragmentListBinding
-import com.example.kopa.recyclerView.Adaptador
+import com.example.kopa.recyclerView.AdaptadorBebidas
 
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
@@ -38,19 +38,19 @@ class ListFragment : Fragment() {
 
         //Añado la recycler view al fragmento.
         binding.rvbebidas.layoutManager = LinearLayoutManager(context)
-        binding.rvbebidas.adapter = Adaptador ((activity as MainActivity).miViewModel.bebidas)
+        binding.rvbebidas.adapter = AdaptadorBebidas ((activity as MainActivity).miViewModel.bebidas)
 
 
         //Añado un menú personalizado para la pantalla de la lista de bebidas.
         val menuHost: MenuHost = requireActivity()
 
-        menuHost.addMenuProvider(object : MenuProvider{
+        menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater){
                 menuInflater.inflate(R.menu.menu_list, menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                activity?.finish()
+                findNavController().navigate(R.id.action_listFragment_to_dataFragment)
                 return true
             }
         },viewLifecycleOwner, Lifecycle.State.RESUMED)

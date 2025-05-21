@@ -49,11 +49,11 @@
         android:id="@+id/llhBebidas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/yellow"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:background="@color/yellow"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/llvProgreso"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llhfecha">
 
@@ -69,6 +69,30 @@
             android:text="+"
             android:textColor="@color/white"
             android:textSize="34sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llvProgreso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow"
+        android:orientation="vertical"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/llhBebidas"
+        app:layout_constraintTop_toBottomOf="@+id/llhfecha">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProgreso"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </LinearLayout>
 
     <LinearLayout
