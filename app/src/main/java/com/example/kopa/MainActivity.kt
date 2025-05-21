@@ -12,7 +12,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import com.example.kopa.bbdd.Repositorio
+import com.example.kopa.bbdd.bbdd
 import com.example.kopa.databinding.ActivityMainBinding
+import com.example.kopa.modelo.BebidaViewModelFactory
 import com.example.kopa.modelo.Usuario
 import com.example.kopa.modelo.VM
 
@@ -21,8 +24,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    val miDataBase by lazy { bbdd.getDatabase(this) }
+    val miRepositorio by lazy { Repositorio( miDataBase.miDAO() ) }
     //Introduzco el ViewModel para que los datos se guarden en caché.
-    val miViewModel : VM by viewModels()
+    val miViewModel : VM by viewModels{ BebidaViewModelFactory(miRepositorio) }
 
     //Aquí van los datos globales de la aplicación.
     var bebida:String? = null
@@ -48,10 +53,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        //Cuando se abre la app por primera vez, se cargan todas las bebidas en la lista de bebidas del VM .
-        miViewModel.insertarBebidas()
-        miViewModel.insertarColores()
 
         setSupportActionBar(binding.toolbar)
 

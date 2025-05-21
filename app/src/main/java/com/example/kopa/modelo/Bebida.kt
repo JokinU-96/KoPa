@@ -1,4 +1,10 @@
 package com.example.kopa.modelo
+
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 /*
 * Nombre = nombre del tipo de bebida (ej. cerveza, vino, kalimotxo etc.)
 * Cantidad = cantidad en l de bebida (ej. vaso normal = 250ml, pinta = 0,5ml etc.)
@@ -10,14 +16,16 @@ package com.example.kopa.modelo
 *
 * consumo = se mide en vasos, botellínes, copas etc.
 * */
-class Bebida (
-    var nombre : String,
-    var cantidad : Double,
-    var vaso : Int,
-    var comida : Int,
-    var casa : Int,
-    var aviso : Int,
-    var muerte : Int,
-    var color : String,
-    var consumido : Int
-)
+@Entity(tableName = "bebidas")
+data class Bebida (
+    @PrimaryKey(autoGenerate = true) var id : Int = 0,
+    @NonNull @ColumnInfo (name = "nombre") val nombre : String = "",
+    @NonNull @ColumnInfo (name = "cantidad") var cantidad : Double = 0.0,
+    @NonNull @ColumnInfo (name = "vaso") var vaso : Int = 0,
+    @NonNull @ColumnInfo (name = "comida") var comida : Int = 0,
+    @NonNull @ColumnInfo (name = "casa") var casa : Int = 0,
+    @NonNull @ColumnInfo (name = "aviso") var aviso : Int = 0,
+    @NonNull @ColumnInfo (name = "muerte") var muerte : Int = 0,
+    @NonNull @ColumnInfo (name = "color") var color : String = "",
+    @NonNull @ColumnInfo (name = "consumido") var consumido : Int = 0
+){}
