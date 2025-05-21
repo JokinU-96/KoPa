@@ -16,6 +16,10 @@ class VM(private val miRepositorio : Repositorio):ViewModel() {
 
     var progreso : MutableList<Bebida> = mutableListOf()
 
+    fun mostrarBebidas() = viewModelScope.launch{
+        bebidas = miRepositorio.mostrarBebidas().asLiveData()
+    }
+
     fun insertar(miBebida: Bebida) =viewModelScope.launch{
         miRepositorio.insertar(miBebida)
     }

@@ -30,36 +30,39 @@ class InfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //Voy a mostrar los datos de cada bebida, volumen y cantidades de consumo límites.
         var posicion = arguments?.getInt("posicion") ?: -1
-        var bebida = (activity as MainActivity).miViewModel.bebidas[0]
+        (activity as MainActivity).miViewModel.bebidas.observe(viewLifecycleOwner) { bebidasList ->
+            // This block will be executed whenever the data in bebidasList changes
 
-        //Si la posción del elemento seleccionado es erroneo la ventana retrocede a donde estaba.
-        if (posicion == -1) findNavController().popBackStack()
-        else{
-            //sino, cargo los datos de la bebida.
-            bebida = (activity as MainActivity).miViewModel.bebidas[posicion]
-            binding.etNombre.setText(bebida.nombre);
-            binding.etVolumen.setText(bebida.cantidad.toString());
-            binding.etVaso.setText(bebida.vaso.toString());
-            binding.etComida.setText(bebida.comida.toString());
-            binding.etCasa.setText(bebida.casa.toString());
-            binding.etAviso.setText(bebida.aviso.toString());
-            binding.etMuerte.setText(bebida.muerte.toString());
-        }
+            // Si la posición del elemento seleccionado es errónea la ventana retrocede a donde estaba.
+            if (posicion == -1 || posicion >= bebidasList.size) { // Also check if position is within bounds
+                findNavController().popBackStack()
+            } else {
+                // sino, cargo los datos de la bebida.
+                val bebida = bebidasList[posicion] // Access the element from the observed list
+                binding.etNombre.setText(bebida.nombre)
+                binding.etVolumen.setText(bebida.cantidad.toString())
+                binding.etVaso.setText(bebida.vaso.toString())
+                binding.etComida.setText(bebida.comida.toString())
+                binding.etCasa.setText(bebida.casa.toString())
+                binding.etAviso.setText(bebida.aviso.toString())
+                binding.etMuerte.setText(bebida.muerte.toString())
 
-        binding.btnSumarBebida.setOnClickListener{
-            sumarProgreso(bebida)
+                binding.btnSumarBebida.setOnClickListener {
+                    /*sumarProgreso(bebida)*/
+                }
+            }
         }
 
     }
 
-    fun sumarProgreso(bebida: Bebida){
+    /*fun sumarProgreso(bebida: Bebida){
         var bebidaConsumida: Bebida = Bebida(bebida.nombre , bebida.cantidad , bebida.vaso , bebida.comida , bebida.casa , bebida.aviso , bebida.muerte, bebida.color , bebida.consumido)
 
         (activity as MainActivity).miViewModel.progreso.add(bebidaConsumida)
 
         findNavController().navigate(R.id.action_infoFragment_to_listFragment)
 
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

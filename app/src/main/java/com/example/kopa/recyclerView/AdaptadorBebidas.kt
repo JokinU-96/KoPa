@@ -11,7 +11,7 @@ import com.example.kopa.R
 import com.example.kopa.databinding.RecyclerviewBebidaBinding
 import com.example.kopa.bbdd.Bebida
 
-class AdaptadorBebidas(var listaDEbebidas: MutableList<Bebida>):RecyclerView.Adapter<AdaptadorBebidas.BebidaVH>() {
+class AdaptadorBebidas(var listaDEbebidas: List<Bebida>):RecyclerView.Adapter<AdaptadorBebidas.BebidaVH>() {
     inner class BebidaVH(val binding: RecyclerviewBebidaBinding): RecyclerView.ViewHolder(binding.root){
         var posicion: Int = 0
         init {
