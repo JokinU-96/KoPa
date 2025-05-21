@@ -28,7 +28,8 @@ class InfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Voy a mostrar los datos de cada bebida, volumen y cantidades de consumo límites.
+
+        //Voy a mostrar los datos de una bebida, volumen y cantidades de consumo límites.
         var posicion = arguments?.getInt("posicion") ?: -1
         (activity as MainActivity).miViewModel.bebidas.observe(viewLifecycleOwner) { bebidasList ->
             // This block will be executed whenever the data in bebidasList changes
@@ -48,21 +49,21 @@ class InfoFragment : Fragment() {
                 binding.etMuerte.setText(bebida.muerte.toString())
 
                 binding.btnSumarBebida.setOnClickListener {
-                    /*sumarProgreso(bebida)*/
+                    sumarProgreso(bebida)
                 }
             }
         }
 
     }
 
-    /*fun sumarProgreso(bebida: Bebida){
-        var bebidaConsumida: Bebida = Bebida(bebida.nombre , bebida.cantidad , bebida.vaso , bebida.comida , bebida.casa , bebida.aviso , bebida.muerte, bebida.color , bebida.consumido)
+    fun sumarProgreso(bebida: Bebida){
+        var bebidaConsumida: Bebida = Bebida(bebida.id , bebida.nombre , bebida.cantidad , bebida.vaso , bebida.comida , bebida.casa , bebida.aviso , bebida.muerte, bebida.color , bebida.consumido)
 
         (activity as MainActivity).miViewModel.progreso.add(bebidaConsumida)
 
         findNavController().navigate(R.id.action_infoFragment_to_listFragment)
 
-    }*/
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

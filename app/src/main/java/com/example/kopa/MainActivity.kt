@@ -24,9 +24,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+
     val miDataBase by lazy { bbdd.getDatabase(this) }
     val miRepositorio by lazy { Repositorio( miDataBase.miDAO() ) }
-    //Introduzco el ViewModel para que los datos se guarden en caché.
     val miViewModel : VM by viewModels{ BebidaViewModelFactory(miRepositorio) }
 
     //Aquí van los datos globales de la aplicación.

@@ -11,20 +11,18 @@ import kotlinx.coroutines.launch
 
 @Database(entities = arrayOf(Bebida::class), version = 1, exportSchema = false)
 abstract class bbdd: RoomDatabase() {
-    abstract  fun miDAO(): BebidaDAO
+    abstract fun miDAO(): BebidaDAO
 
     companion object {
         @Volatile
         private var INSTANCE: bbdd? = null
         fun getDatabase(context: Context): bbdd {
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
+                INSTANCE?:Room.databaseBuilder(
                     context.applicationContext,
                     bbdd::class.java,
-                    "palabra_dataBase"
-                ).build()
-                INSTANCE = instance
-                instance
+                    "bbdd_KoPa"
+                ).addCallback(roomCallback).build().also{ INSTANCE = it }
             }
         }
         // Callback que se ejecuta cuando se crea la base de datos
@@ -51,4 +49,6 @@ abstract class bbdd: RoomDatabase() {
             }
         }
     }
+
+
 }

@@ -37,9 +37,11 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Añado la recycler view al fragmento.
+        //Cargo los datos de manera que tenoo una bbdd poblada.
         (activity as MainActivity).miViewModel.mostrarBebidas()
+        //Alimento mis recycler views.
         (activity as MainActivity).miViewModel.bebidas.observe(activity as MainActivity){
-            binding.rvbebidas.layoutManager = LinearLayoutManager(context)
+            binding.rvbebidas.layoutManager = LinearLayoutManager(activity)
             binding.rvbebidas.adapter=AdaptadorBebidas(it)
         }
 
@@ -61,6 +63,7 @@ class ListFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        (activity as MainActivity).miViewModel.bebidas.removeObservers(activity as MainActivity)
         super.onDestroyView()
         _binding = null
     }

@@ -12,8 +12,7 @@ class AdaptadorProgreso(var listaProgreso : MutableList<Bebida>): RecyclerView.A
     inner class ProgresoVH(val binding: RecyclerviewProgresoBinding): RecyclerView.ViewHolder(binding.root){
         var posicion: Int = 0
         init {
-            binding.btnConsumo.setOnClickListener{
-            }
+            //Necesito cambiar el valor del consumo de bebida cada vez que el usuario pulsa sobre el icono del +.
         }
     }
 
@@ -31,5 +30,7 @@ class AdaptadorProgreso(var listaProgreso : MutableList<Bebida>): RecyclerView.A
         val colorArgb = Color.parseColor("${ listaProgreso[position].color }")
         holder.binding.rectangulo.background = ColorDrawable(colorArgb)
         holder.posicion = position
+
+        //Necesito cambiar el valor del consumo.
     }
 }
