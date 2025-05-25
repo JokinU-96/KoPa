@@ -55,4 +55,5 @@
     <string name="contrase_a">Contraseña</string>
     <string name="iniciar_sesi_n">Iniciar sesión</string>
     <string name="ver">Ver</string>
+    <string name="aviso">Aviso</string>
 </resources>

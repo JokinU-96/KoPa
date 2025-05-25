@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kopa.databinding.FragmentDataBinding
+import com.example.kopa.recyclerView.AdaptadorAvisos
 import com.example.kopa.recyclerView.AdaptadorProgreso
 
 /**
@@ -50,16 +51,39 @@ class DataFragment : Fragment() {
 
         //La idea es construir dentro de un linear layout una recycler view nueva que
         //se alimente de todas las bebidas que lleva consumiendo el usuario durante cada sesión de bebercio.
-        /*Añado la recycler view*/
-        binding.rvProgreso.layoutManager = LinearLayoutManager(context)
-        binding.rvProgreso.adapter = AdaptadorProgreso ((activity as MainActivity).miViewModel.progreso)
 
+        /*Añado la recycler view*/
+
+        //La intención es hacer una lista observable de avisos para que cuando se añada un aviso a la lista,
+        // automáticamente se actualize la recycler view y el adaptador de avisos. Sin tener que salir y volver a entrar.
+        // Pero no me funciona porque no encuentra los adapters.
+        /*(activity as MainActivity).miViewModel.avisos.observe(activity as MainActivity){
+            binding.rvProgreso.layoutManager = LinearLayoutManager(activity)
+            binding.rvProgreso.adapter = AdaptadorProgreso ((activity as MainActivity).miViewModel.progreso, it)
+
+            binding.rvAviso.layoutManager = LinearLayoutManager(activity)
+            binding.rvAviso.adapter = AdaptadorAvisos (it)
+        }*/
+
+        //Esta es la versión que para funcionar hace falta salir del fragmento y volver a entrar.
+        binding.rvProgreso.layoutManager = LinearLayoutManager(activity)
+        binding.rvProgreso.adapter = AdaptadorProgreso ((activity as MainActivity).miViewModel.progreso, (activity as MainActivity).miViewModel.avisos)
+
+        binding.rvAviso.layoutManager = LinearLayoutManager(activity)
+        binding.rvAviso.adapter = AdaptadorAvisos ((activity as MainActivity).miViewModel.avisos)
+
+
+
+        //Defino la lógica de la aplicación.
+        (activity as MainActivity).miViewModel.consumo.observe(activity as MainActivity){
+
+        }
 
         //Defino la acción del botón +.
         //Deberá llevar al listado de bebidas. Esta recoge los elementos desde la base de datos.
         binding.btnSuma.setOnClickListener{
             if((activity as MainActivity).miViewModel.usuario == null) {
-                Toast.makeText(context, "Debes hacer el login antes de comprar un vehículo.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Debes hacer el login antes de añadir una bebida.", Toast.LENGTH_SHORT).show()
             } else {
                 findNavController().navigate(R.id.action_dataFragment_to_listFragment)
             }
@@ -68,6 +92,7 @@ class DataFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        //(activity as MainActivity).miViewModel.avisos.removeObservers(activity as MainActivity)
         super.onDestroyView()
         _binding = null
     }

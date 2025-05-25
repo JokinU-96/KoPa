@@ -59,8 +59,12 @@ class InfoFragment : Fragment() {
     fun sumarProgreso(bebida: Bebida){
         var bebidaConsumida: Bebida = Bebida(bebida.id , bebida.nombre , bebida.cantidad , bebida.vaso , bebida.comida , bebida.casa , bebida.aviso , bebida.muerte, bebida.color , bebida.consumido)
 
+        //Añado la bebida al recyclerview de la pantalla principal.
+        //y hago un +1 para que cuente el primer consumo.
+        bebidaConsumida.consumido += 1
         (activity as MainActivity).miViewModel.progreso.add(bebidaConsumida)
 
+        //Devuelvo al usuario a la ventana principal.
         findNavController().navigate(R.id.action_infoFragment_to_listFragment)
 
     }

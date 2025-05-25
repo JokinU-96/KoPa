@@ -46,79 +46,88 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llhBebidas"
+        android:id="@+id/llPrincipal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/yellow"
-        android:orientation="horizontal"
-        android:padding="5dp"
+        android:layout_height="500dp"
+        android:gravity="center_vertical"
+        android:overScrollMode="ifContentScrolls"
+        app:flow_horizontalAlign="center"
+        app:flow_verticalAlign="center"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toStartOf="@+id/llvProgreso"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llhfecha">
 
-        <Button
-            android:id="@+id/btnSuma"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/llhBebidas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:background="@color/yellow"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/btnSuma"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/red"
+                android:fontFamily="sans-serif-black"
+                android:text="+"
+                android:textColor="@color/white"
+                android:textSize="34sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llvProgreso"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/red"
-            android:fontFamily="sans-serif-black"
-            android:text="+"
-            android:textColor="@color/white"
-            android:textSize="34sp" />
+            android:background="@color/yellow"
+            android:orientation="vertical"
+            android:padding="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/llhBebidas"
+            app:layout_constraintTop_toBottomOf="@+id/llhfecha">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProgreso"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llvProgreso"
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:background="@color/yellow"
-        android:orientation="vertical"
-        android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/llhBebidas"
-        app:layout_constraintTop_toBottomOf="@+id/llhfecha">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llPrincipal">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProgreso"
+            android:id="@+id/rvAviso"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        android:orientation="horizontal"
-        android:padding="3dp"
-        android:background="@color/yellow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llhBebidas">
-
-        <Button
-            android:id="@+id/btnInfo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/red"
-            android:fontFamily="sans-serif-black"
-            android:text="@string/comida"
-            android:textSize="34sp" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
