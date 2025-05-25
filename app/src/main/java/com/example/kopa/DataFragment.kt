@@ -44,26 +44,11 @@ class DataFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //De este modo tengo la lista de avisos con un observer que cuando los datos cambien cambiará.
-        /*(activity as MainActivity).miViewModel.avisos.observe(activity as MainActivity){
-            binding.rvAviso.layoutManager = LinearLayoutManager(activity)
-            binding.rvAviso.adapter= AdaptadorAvisos(it)
-        }*/
+        binding.rvAviso.layoutManager = LinearLayoutManager(activity)
+        binding.rvAviso.adapter = AdaptadorAvisos ((activity as MainActivity).miViewModel.avisos)
 
-        /*binding.rvProgreso.layoutManager = LinearLayoutManager(activity)
-        binding.rvProgreso.adapter = (activity as MainActivity).miViewModel.avisos.value?.let {
-            AdaptadorProgreso ((activity as MainActivity).miViewModel.progreso,
-                it
-            )
-        }*/
-
-        (activity as MainActivity).miViewModel.avisos.observe(viewLifecycleOwner) { avisos ->
-            // This block will be executed whenever the data in avisos changes
-            Toast.makeText(context, "Avisos ha sido modificada", Toast.LENGTH_SHORT).show()
-        }
-
-        /*binding.rvAviso.layoutManager = LinearLayoutManager(activity)
-        binding.rvAviso.adapter = AdaptadorAvisos ((activity as MainActivity).miViewModel.avisos)*/
+        binding.rvProgreso.layoutManager = LinearLayoutManager(activity)
+        binding.rvProgreso.adapter = AdaptadorProgreso ((activity as MainActivity).miViewModel.progreso, (activity as MainActivity).miViewModel.avisos)
 
         //Defino la acción del botón +.
         //Deberá llevar al listado de bebidas. Esta recoge los elementos desde la base de datos.
