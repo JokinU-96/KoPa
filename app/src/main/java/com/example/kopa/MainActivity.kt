@@ -11,6 +11,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.kopa.bbdd.Repositorio
 import com.example.kopa.bbdd.bbdd
@@ -24,10 +29,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-
     val miDataBase by lazy { bbdd.getDatabase(this) }
     val miRepositorio by lazy { Repositorio( miDataBase.miDAO() ) }
     val miViewModel : VM by viewModels{ BebidaViewModelFactory(miRepositorio) }
+
+    val spinner: Spinner by lazy { findViewById(R.id.spinner) }
+    val spinnerItems: Array<String> by lazy { resources.getStringArray(R.array.spinner_items) }
+    val adapter: ArrayAdapter<String> by lazy { ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerItems) }
 
     //Aquí van los datos globales de la aplicación.
     var bebida:String? = null
@@ -37,6 +45,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val spinner = findViewById<Spinner>(R.id.spinner)
+        val spinnerItems = resources.getStringArray(R.array.spinner_items)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerItems)
 
         //cargo los datos persistentes por si los hubiera.
         datos = this.getSharedPreferences("datos", Context.MODE_PRIVATE)
@@ -50,6 +62,10 @@ class MainActivity : AppCompatActivity() {
                     miViewModel.usuario = usuario
                 }
             }
+
+        //Recogido desde https://medium.com/@myofficework000/a-spinner-is-a-drop-down-menu-that-allows-users-to-select-an-item-from-a-list-e61d48368e5
+        //Pretendo crear un menú desplegable en la vista Create_fragment para elegir el color de la bebida.
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

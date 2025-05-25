@@ -13,16 +13,12 @@ import kotlinx.coroutines.launch
 class VM(private val miRepositorio : Repositorio):ViewModel() {
 
     var bebidas : LiveData<List<Bebida>> = miRepositorio.mostrarBebidas().asLiveData()
-    var colores : MutableList<Color> = mutableListOf()
     var usuario : Usuario? = null
 
-    val avisos: MutableList<String> = mutableListOf()
+    //val avisos: MutableList<String> = mutableListOf()
     var progreso : MutableList<Bebida> = mutableListOf()
-    //var avisos : MutableLiveData<MutableList<String>> = MutableLiveData()
+    var avisos : MutableLiveData<MutableList<String>> = MutableLiveData()
     //var progreso : MutableLiveData<MutableList<Bebida>> = MutableLiveData()
-
-    //Beta
-    var consumo : MutableLiveData<Int> = MutableLiveData()
 
     fun mostrarBebidas() = viewModelScope.launch{
         bebidas = miRepositorio.mostrarBebidas().asLiveData()

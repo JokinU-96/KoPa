@@ -19,7 +19,7 @@ class AdaptadorBebidas(var listaDEbebidas: List<Bebida>):RecyclerView.Adapter<Ad
             //los datos de la bebida correspondiente.
             binding.btnVerBebida.setOnClickListener{
                 val miBundle = bundleOf("posicion" to posicion)
-                //Traslado al usuario a los detalles de cada bebida.
+                //Traslado al usuario a los detalles de cada bebida e incorporo el bundle.
                 binding.btnVerBebida.findNavController().navigate(R.id.action_listFragment_to_infoFragment, miBundle)
             }
         }

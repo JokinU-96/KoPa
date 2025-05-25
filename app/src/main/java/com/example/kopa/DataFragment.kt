@@ -12,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kopa.databinding.FragmentDataBinding
 import com.example.kopa.recyclerView.AdaptadorAvisos
+import com.example.kopa.recyclerView.AdaptadorBebidas
 import com.example.kopa.recyclerView.AdaptadorProgreso
+import java.nio.charset.MalformedInputException
 
 /**
  *  Para mostrar los datos de la aplicación,
@@ -42,42 +44,26 @@ class DataFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Necesito guardar la lista de bebidas que lleva consumidas.
-        // Cantidad de veces que ha consumido cada una de las bebidas desde que inició la sesión.
-        // Tipos de bebida que ha consumido desde que inició sesión por última vez.
-        // La hora a la que empezó a beber.
-        val datos: SharedPreferences = (activity as MainActivity).getSharedPreferences("datos", Context.MODE_PRIVATE)
-        val editor = datos.edit()
-
-        //La idea es construir dentro de un linear layout una recycler view nueva que
-        //se alimente de todas las bebidas que lleva consumiendo el usuario durante cada sesión de bebercio.
-
-        /*Añado la recycler view*/
-
-        //La intención es hacer una lista observable de avisos para que cuando se añada un aviso a la lista,
-        // automáticamente se actualize la recycler view y el adaptador de avisos. Sin tener que salir y volver a entrar.
-        // Pero no me funciona porque no encuentra los adapters.
+        //De este modo tengo la lista de avisos con un observer que cuando los datos cambien cambiará.
         /*(activity as MainActivity).miViewModel.avisos.observe(activity as MainActivity){
-            binding.rvProgreso.layoutManager = LinearLayoutManager(activity)
-            binding.rvProgreso.adapter = AdaptadorProgreso ((activity as MainActivity).miViewModel.progreso, it)
-
             binding.rvAviso.layoutManager = LinearLayoutManager(activity)
-            binding.rvAviso.adapter = AdaptadorAvisos (it)
+            binding.rvAviso.adapter= AdaptadorAvisos(it)
         }*/
 
-        //Esta es la versión que para funcionar hace falta salir del fragmento y volver a entrar.
-        binding.rvProgreso.layoutManager = LinearLayoutManager(activity)
-        binding.rvProgreso.adapter = AdaptadorProgreso ((activity as MainActivity).miViewModel.progreso, (activity as MainActivity).miViewModel.avisos)
+        /*binding.rvProgreso.layoutManager = LinearLayoutManager(activity)
+        binding.rvProgreso.adapter = (activity as MainActivity).miViewModel.avisos.value?.let {
+            AdaptadorProgreso ((activity as MainActivity).miViewModel.progreso,
+                it
+            )
+        }*/
 
-        binding.rvAviso.layoutManager = LinearLayoutManager(activity)
-        binding.rvAviso.adapter = AdaptadorAvisos ((activity as MainActivity).miViewModel.avisos)
-
-
-
-        //Defino la lógica de la aplicación.
-        (activity as MainActivity).miViewModel.consumo.observe(activity as MainActivity){
-
+        (activity as MainActivity).miViewModel.avisos.observe(viewLifecycleOwner) { avisos ->
+            // This block will be executed whenever the data in avisos changes
+            Toast.makeText(context, "Avisos ha sido modificada", Toast.LENGTH_SHORT).show()
         }
+
+        /*binding.rvAviso.layoutManager = LinearLayoutManager(activity)
+        binding.rvAviso.adapter = AdaptadorAvisos ((activity as MainActivity).miViewModel.avisos)*/
 
         //Defino la acción del botón +.
         //Deberá llevar al listado de bebidas. Esta recoge los elementos desde la base de datos.
@@ -93,6 +79,7 @@ class DataFragment : Fragment() {
 
     override fun onDestroyView() {
         //(activity as MainActivity).miViewModel.avisos.removeObservers(activity as MainActivity)
+        //(activity as MainActivity).miViewModel.progreso.removeObservers(activity as MainActivity)
         super.onDestroyView()
         _binding = null
     }

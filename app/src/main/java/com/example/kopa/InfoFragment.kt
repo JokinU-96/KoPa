@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.kopa.databinding.FragmentInfoBinding
 import com.example.kopa.bbdd.Bebida
@@ -48,6 +49,27 @@ class InfoFragment : Fragment() {
                 binding.etAviso.setText(bebida.aviso.toString())
                 binding.etMuerte.setText(bebida.muerte.toString())
 
+                //Defino lo que hace el botón editar.
+                binding.btnEditarBebida.setOnClickListener{
+                    try{
+                        (activity as MainActivity).miViewModel.modificar(Bebida(
+                            id = bebida.id,
+                            nombre = binding.etNombre.text.toString(),
+                            cantidad = binding.etVolumen.text.toString().toDouble(),
+                            vaso = binding.etVaso.text.toString().toInt(),
+                            comida = binding.etComida.text.toString().toInt(),
+                            casa = binding.etCasa.text.toString().toInt(),
+                            aviso = binding.etAviso.text.toString().toInt(),
+                            muerte = binding.etMuerte.text.toString().toInt(),
+                            color = bebida.color
+                        ))
+                        Toast.makeText(context, "Bebida editada.", Toast.LENGTH_SHORT).show()
+                    }  catch (e : NumberFormatException){
+                        Toast.makeText(context, "Por favor ingresa un valor válido.", Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
                 binding.btnSumarBebida.setOnClickListener {
                     sumarProgreso(bebida)
                 }
@@ -65,7 +87,7 @@ class InfoFragment : Fragment() {
         (activity as MainActivity).miViewModel.progreso.add(bebidaConsumida)
 
         //Devuelvo al usuario a la ventana principal.
-        findNavController().navigate(R.id.action_infoFragment_to_listFragment)
+        findNavController().navigate(R.id.action_infoFragment_to_dataFragment)
 
     }
 

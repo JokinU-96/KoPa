@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kopa.databinding.FragmentListBinding
@@ -53,11 +54,21 @@ class ListFragment : Fragment() {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater){
                 menuInflater.inflate(R.menu.menu_list, menu)
             }
-
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                findNavController().navigate(R.id.action_listFragment_to_dataFragment)
+                return when (menuItem.itemId) {
+                    R.id.anyadirBebida -> {
+                        findNavController().navigate(R.id.action_listFragment_to_createFragment)
+                        true // Indicate that the event has been handled
+                    }
+                    android.R.id.home -> { // Example for another menu item
+                        findNavController().navigate(R.id.action_listFragment_to_dataFragment)
+                        true
+                    }
+                    else -> false // Return false for unhandled items, allowing other MenuProviders to handle them
+                }
                 return true
             }
+
         },viewLifecycleOwner, Lifecycle.State.RESUMED)
 
     }
