@@ -19,6 +19,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.navigation.fragment.findNavController
 import com.example.kopa.bbdd.Repositorio
 import com.example.kopa.bbdd.bbdd
 import com.example.kopa.databinding.ActivityMainBinding
@@ -55,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
         //Cargo los datos de manera que tenoo una bbdd poblada.
         miViewModel.mostrarBebidas()
-        miViewModel.resetearConsumo()
 
         //cargo los datos persistentes por si los hubiera.
         datos = this.getSharedPreferences("datos", Context.MODE_PRIVATE)
@@ -101,10 +101,22 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+            R.id.action_settings -> {
+                true
+            }
+            R.id.reset -> {
+                miViewModel.resetearConsumo()
+                true // Indicate that the event has been handled
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+
         }
+
     }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)

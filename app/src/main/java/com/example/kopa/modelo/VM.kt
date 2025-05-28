@@ -23,7 +23,7 @@ class VM(private val miRepositorio : Repositorio):ViewModel() {
     var usuario : Usuario? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
-    val formatter = DateTimeFormatter.ofPattern("HH:mm")
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
     @RequiresApi(Build.VERSION_CODES.O)
     val crono = LocalDateTime.now().format(formatter).toString()

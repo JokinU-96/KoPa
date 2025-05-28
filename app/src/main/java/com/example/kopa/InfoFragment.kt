@@ -77,6 +77,7 @@ class InfoFragment : Fragment() {
                 binding.btnSumarBebida.setOnClickListener {
                     sumarProgreso(bebida)
                     (activity as MainActivity).miViewModel.horaIni = (activity as MainActivity).miViewModel.crono
+
                 }
             }
         }
