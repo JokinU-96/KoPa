@@ -234,7 +234,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/red"
         android:fontFamily="sans-serif-black"
-        android:text="Editar"
+        android:text="@string/guardar"
         android:textColor="@color/white"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"

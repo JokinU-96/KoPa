@@ -2,6 +2,7 @@ package com.example.kopa
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -83,14 +84,12 @@ class InfoFragment : Fragment() {
     }
 
     fun sumarProgreso(bebida: Bebida){
-        var bebidaConsumida: Bebida = Bebida(bebida.id , bebida.nombre , bebida.cantidad , bebida.vaso , bebida.comida , bebida.casa , bebida.aviso , bebida.muerte, bebida.color , bebida.consumido)
+        //Sumo la primera copa y modifico la base de datos.
+        bebida.consumido += 1
+        (activity as MainActivity).miViewModel.modificar(bebida)
 
-
-
-        //Añado la bebida al recyclerview de la pantalla principal.
-        //y hago un +1 para que cuente el primer consumo.
-        bebidaConsumida.consumido += 1
-        (activity as MainActivity).miViewModel.progreso.add(bebidaConsumida)
+        //Cargo las bebidas desde base de datos
+        Log.d("bebida","Bebida modificada")
 
         //Devuelvo al usuario a la ventana principal.
         findNavController().navigate(R.id.action_infoFragment_to_dataFragment)

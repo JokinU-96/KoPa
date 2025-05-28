@@ -12,11 +12,13 @@ import com.example.kopa.databinding.RecyclerviewProgresoBinding
 import com.example.kopa.bbdd.Bebida
 import com.example.kopa.databinding.RecyclerviewAvisoBinding
 
-class AdaptadorAvisos(var avisos : MutableList<String>): RecyclerView.Adapter<AdaptadorAvisos.AvisoVH>() {
+class AdaptadorAvisos(var avisos : MutableList<String>, val adapterOnClick : (Int) -> Unit): RecyclerView.Adapter<AdaptadorAvisos.AvisoVH>() {
     inner class AvisoVH(val binding: RecyclerviewAvisoBinding): RecyclerView.ViewHolder(binding.root){
         var posicion: Int = 0
         init {
-
+            binding.btnAviso.setOnClickListener{
+                adapterOnClick(posicion)
+            }
         }
     }
 
@@ -31,9 +33,5 @@ class AdaptadorAvisos(var avisos : MutableList<String>): RecyclerView.Adapter<Ad
 
     override fun onBindViewHolder(holder: AvisoVH, position: Int) {
         holder.binding.btnAviso.text = avisos[position]
-
-        holder.binding.btnAviso.setOnClickListener(){
-            avisos.remove(avisos[position])
-        }
     }
 }

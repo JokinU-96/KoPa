@@ -1,6 +1,7 @@
 package com.example.kopa.modelo
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,13 +31,19 @@ class VM(private val miRepositorio : Repositorio):ViewModel() {
     @RequiresApi(Build.VERSION_CODES.O)
     var horaIni : String = ""
 
-    val avisos: MutableList<String> = mutableListOf()
-    var progreso : MutableList<Bebida> = mutableListOf()
-    //var avisos : MutableLiveData<MutableList<String>> = MutableLiveData()
-    //var progreso : MutableLiveData<MutableList<Bebida>> = MutableLiveData()
+    var avisos : MutableLiveData<MutableList<String>> = MutableLiveData()
+    lateinit var progreso : LiveData<List<Bebida>>
+
+    init{
+        avisos.value = mutableListOf()
+    }
 
     fun mostrarBebidas() = viewModelScope.launch{
         bebidas = miRepositorio.mostrarBebidas().asLiveData()
+    }
+
+    fun mostrarBebidasConsumidas() = viewModelScope.launch {
+        progreso = miRepositorio.mostrarBebidasConsumidas().asLiveData()
     }
 
     fun insertar(miBebida: Bebida) =viewModelScope.launch{
@@ -47,6 +54,10 @@ class VM(private val miRepositorio : Repositorio):ViewModel() {
     }
     fun modificar(miBebida: Bebida) =viewModelScope.launch{
         miRepositorio.modificar(miBebida)
+        Log.d("dataf", miBebida.consumido.toString())
+    }
+    fun resetearConsumo() = viewModelScope.launch{
+        miRepositorio.resetearConsumo()
     }
 }
 

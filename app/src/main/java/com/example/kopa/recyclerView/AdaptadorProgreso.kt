@@ -11,10 +11,14 @@ import com.example.kopa.MainActivity
 import com.example.kopa.databinding.RecyclerviewProgresoBinding
 import com.example.kopa.bbdd.Bebida
 
-class AdaptadorProgreso(var listaProgreso : MutableList<Bebida>, var avisos : MutableList<String>): RecyclerView.Adapter<AdaptadorProgreso.ProgresoVH>() {
+class AdaptadorProgreso(var listaProgreso : List<Bebida>, val adapterOnClick : (Int) -> Unit): RecyclerView.Adapter<AdaptadorProgreso.ProgresoVH>() {
     inner class ProgresoVH(val binding: RecyclerviewProgresoBinding): RecyclerView.ViewHolder(binding.root){
         var posicion: Int = 0
         init {
+            binding.btnConsumo.setOnClickListener{
+                adapterOnClick(posicion)
+                binding.btnConsumo.text=listaProgreso[posicion].consumido.toString()
+            }
         }
     }
 
@@ -32,25 +36,6 @@ class AdaptadorProgreso(var listaProgreso : MutableList<Bebida>, var avisos : Mu
         val colorArgb = Color.parseColor("${ listaProgreso[position].color }")
         holder.binding.rectangulo.background = ColorDrawable(colorArgb)
         holder.posicion = position
-
-        holder.binding.btnConsumo.text = listaProgreso[position].consumido.toString()
-
-        val bebidaActual = listaProgreso[position]
-
-        //Necesito cambiar el valor del consumo.
-        holder.binding.btnConsumo.setOnClickListener {
-            bebidaActual.consumido += 1
-            holder.binding.btnConsumo.text = bebidaActual.consumido.toString()
-            //falta modificar la bebida actual en la base de datos.
-
-            //Hago las condicionales para que vaya creando avisos.
-            if (bebidaActual.consumido == bebidaActual.vaso){
-                avisos.add("Vaso")
-            } else if (bebidaActual.consumido == bebidaActual.comida){
-                avisos.add("Comida")
-            } else if (bebidaActual.consumido == bebidaActual.casa){
-                avisos.add("Casa")
-            }
-        }
+        holder.binding.btnConsumo.text = "${listaProgreso[position].consumido}"
     }
 }

@@ -19,10 +19,6 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import com.example.kopa.bbdd.Repositorio
 import com.example.kopa.bbdd.bbdd
 import com.example.kopa.databinding.ActivityMainBinding
@@ -59,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         //Cargo los datos de manera que tenoo una bbdd poblada.
         miViewModel.mostrarBebidas()
+        miViewModel.resetearConsumo()
 
         //cargo los datos persistentes por si los hubiera.
         datos = this.getSharedPreferences("datos", Context.MODE_PRIVATE)

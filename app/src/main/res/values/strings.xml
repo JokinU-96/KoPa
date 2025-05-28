@@ -20,6 +20,7 @@
     <string name="aviso">Aviso</string>
 
     <string name="spinner_prompt">Selecciona un elemento</string>
+    <string name="guardar">Guardar</string>
 
     <string-array name="spinner_items">
         <item>#ffc107</item>

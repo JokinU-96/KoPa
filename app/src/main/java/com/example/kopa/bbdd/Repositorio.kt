@@ -9,6 +9,14 @@ class Repositorio (val miDAO: BebidaDAO) {
         return miDAO.mostrarBebidas()
     }
 
+    fun mostrarBebidasConsumidas():Flow<List<Bebida>> {
+        return miDAO.mostrarBebidasConsumidas()
+    }
+
+    suspend fun resetearConsumo(){
+        return miDAO.resetearConsumo()
+    }
+
     @WorkerThread
     suspend fun insertar(miBebida: Bebida){
         miDAO.insertar(miBebida)
