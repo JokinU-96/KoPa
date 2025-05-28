@@ -2,6 +2,7 @@ package com.example.kopa
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,11 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import com.example.kopa.bbdd.Repositorio
 import com.example.kopa.bbdd.bbdd
 import com.example.kopa.databinding.ActivityMainBinding
@@ -43,12 +49,16 @@ class MainActivity : AppCompatActivity() {
     //Para que los datos de usuario persistan incluso despues de apagar y encender el dispositivo.
     lateinit var datos : SharedPreferences
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val spinner = findViewById<Spinner>(R.id.spinner)
         val spinnerItems = resources.getStringArray(R.array.spinner_items)
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerItems)
+
+        //Cargo los datos de manera que tenoo una bbdd poblada.
+        miViewModel.mostrarBebidas()
 
         //cargo los datos persistentes por si los hubiera.
         datos = this.getSharedPreferences("datos", Context.MODE_PRIVATE)
@@ -61,6 +71,12 @@ class MainActivity : AppCompatActivity() {
                     val usuario = Usuario(datos.getString("nombre", "").toString(), datos.getString("apellidos", "").toString(), datos.getInt("edad", 0))
                     miViewModel.usuario = usuario
                 }
+            }
+
+        //Relleno la última hora guardada
+        datos.getString("hora", "")
+            ?.let { hora ->
+                miViewModel.horaIni = datos.getString("hora", "").toString()
             }
 
         //Recogido desde https://medium.com/@myofficework000/a-spinner-is-a-drop-down-menu-that-allows-users-to-select-an-item-from-a-list-e61d48368e5

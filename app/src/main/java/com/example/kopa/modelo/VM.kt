@@ -1,5 +1,7 @@
 package com.example.kopa.modelo
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,11 +11,24 @@ import androidx.lifecycle.viewModelScope
 import com.example.kopa.bbdd.Bebida
 import com.example.kopa.bbdd.Repositorio
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Date
 
 class VM(private val miRepositorio : Repositorio):ViewModel() {
 
     var bebidas : LiveData<List<Bebida>> = miRepositorio.mostrarBebidas().asLiveData()
     var usuario : Usuario? = null
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    val formatter = DateTimeFormatter.ofPattern("HH:mm")
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    val crono = LocalDateTime.now().format(formatter).toString()
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    var horaIni : String = ""
 
     val avisos: MutableList<String> = mutableListOf()
     var progreso : MutableList<Bebida> = mutableListOf()

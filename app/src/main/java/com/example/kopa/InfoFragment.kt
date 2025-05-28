@@ -1,11 +1,13 @@
 package com.example.kopa
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.example.kopa.databinding.FragmentInfoBinding
 import com.example.kopa.bbdd.Bebida
@@ -27,6 +29,7 @@ class InfoFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -72,6 +75,7 @@ class InfoFragment : Fragment() {
 
                 binding.btnSumarBebida.setOnClickListener {
                     sumarProgreso(bebida)
+                    (activity as MainActivity).miViewModel.horaIni = (activity as MainActivity).miViewModel.crono
                 }
             }
         }
@@ -80,6 +84,8 @@ class InfoFragment : Fragment() {
 
     fun sumarProgreso(bebida: Bebida){
         var bebidaConsumida: Bebida = Bebida(bebida.id , bebida.nombre , bebida.cantidad , bebida.vaso , bebida.comida , bebida.casa , bebida.aviso , bebida.muerte, bebida.color , bebida.consumido)
+
+
 
         //Añado la bebida al recyclerview de la pantalla principal.
         //y hago un +1 para que cuente el primer consumo.
