@@ -26,6 +26,7 @@ import com.example.kopa.databinding.ActivityMainBinding
 import com.example.kopa.modelo.BebidaViewModelFactory
 import com.example.kopa.modelo.Usuario
 import com.example.kopa.modelo.VM
+import java.util.Date
 
 class MainActivity : AppCompatActivity() {
 
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         //Relleno la última hora guardada
         datos.getString("hora", "")
             ?.let { hora ->
-                miViewModel.horaIni = datos.getString("hora", "").toString()
+                miViewModel.horaIni = datos.getString("hora", "1996-01-26 10:30:56").toString()
             }
 
         super.onCreate(savedInstanceState)
