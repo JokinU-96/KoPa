@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="sans-serif-medium"
-                android:inputType="text"
+                android:inputType="number"
                 android:textColor="#F2EDED"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

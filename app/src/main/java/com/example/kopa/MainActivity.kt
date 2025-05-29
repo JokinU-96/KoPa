@@ -48,24 +48,22 @@ class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+        //Recogido desde https://medium.com/@myofficework000/a-spinner-is-a-drop-down-menu-that-allows-users-to-select-an-item-from-a-list-e61d48368e5
+        //Pretendo crear un menú desplegable en la vista Create_fragment para elegir el color de la bebida.
         val spinner = findViewById<Spinner>(R.id.spinner)
         val spinnerItems = resources.getStringArray(R.array.spinner_items)
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerItems)
 
-        //Cargo los datos de manera que tenoo una bbdd poblada.
-        miViewModel.mostrarBebidas()
 
         //cargo los datos persistentes por si los hubiera.
         datos = this.getSharedPreferences("datos", Context.MODE_PRIVATE)
 
-        //en caso de que los campos del usuario estén llenos, se añaden al ViewModel.
+        // En caso de que los campos del usuario estén llenos, se añaden al ViewModel.
         datos.getString("nombre", "")
             ?.let{nombre ->
-                datos.getString("apellido", "")?.let{
+                datos.getString("apellidos", "")?.let{
                         apellido ->
-                    val usuario = Usuario(datos.getString("nombre", "").toString(), datos.getString("apellidos", "").toString(), datos.getInt("edad", 0))
+                    val usuario = Usuario(datos.getString("nombre", "").toString(), datos.getString("apellidos", "").toString(), datos.getInt("edad", -1))
                     miViewModel.usuario = usuario
                 }
             }
@@ -76,12 +74,13 @@ class MainActivity : AppCompatActivity() {
                 miViewModel.horaIni = datos.getString("hora", "").toString()
             }
 
-        //Recogido desde https://medium.com/@myofficework000/a-spinner-is-a-drop-down-menu-that-allows-users-to-select-an-item-from-a-list-e61d48368e5
-        //Pretendo crear un menú desplegable en la vista Create_fragment para elegir el color de la bebida.
-
+        super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //Cargo los datos de manera que tenoo una bbdd poblada.
+        miViewModel.mostrarBebidas()
 
         setSupportActionBar(binding.toolbar)
 
@@ -107,6 +106,21 @@ class MainActivity : AppCompatActivity() {
             R.id.reset -> {
                 miViewModel.resetearConsumo()
                 true // Indicate that the event has been handled
+            }
+            R.id.action_logout -> {
+                miViewModel.usuario = null
+
+                val datos : SharedPreferences = this.getSharedPreferences("datos", Context.MODE_PRIVATE)
+                val editor : SharedPreferences.Editor = datos.edit()
+
+                editor.putString("nombre", null)//Nombre
+                editor.putString("apellidos", null)//Apellidos
+                editor.putInt("edad", -1)
+                editor.apply()
+
+                val navController = findNavController(R.id.nav_host_fragment_content_main)
+                //Borrar la pila de fragmentos
+                navController.popBackStack(R.id.logInFragment, false)
             }
             else -> {
                 super.onOptionsItemSelected(item)

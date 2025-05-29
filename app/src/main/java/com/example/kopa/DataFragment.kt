@@ -56,8 +56,12 @@ class DataFragment : Fragment() {
 
         binding.editTextTime.setText((activity as MainActivity).miViewModel.horaIni)
 
+
         //Cargo las bebidas consumidas cada vez que entro en esta pantalla.
         (activity as MainActivity).miViewModel.mostrarBebidasConsumidas()
+
+        cargarLogicaApp()
+
         (activity as MainActivity).miViewModel.progreso.observe(activity as MainActivity){
             //Compruebo que no sea nulo para empezar a jugar con los elementos en el progreso.
             it?.let {
@@ -85,6 +89,7 @@ class DataFragment : Fragment() {
                     Log.d("Bebida Actual: ",(activity as MainActivity).miViewModel.progreso.value?.get(posicion)?.nombre ?:"null")
 
 
+
                     (activity as MainActivity).miViewModel.progreso.value?.get(posicion)?.let{ bebidaActual->
 
                         Log.d("Bebida Actual post Let: ",bebidaActual.nombre)
@@ -93,8 +98,6 @@ class DataFragment : Fragment() {
                         //Cada vez que pulso el botón de consumo, modifico la base de datos.
                         //La bebida Actual es un objeto con todas las propiedades de bebida.
                         (activity as MainActivity).miViewModel.modificar(bebidaActual)
-
-                        cargarLogicaApp()
 
                         ejecutarLogicaAvisos(bebidaActual)
 
@@ -152,9 +155,20 @@ class DataFragment : Fragment() {
         // 4. Calcular la duración entre las dos fechas
         val duration = Duration.between(Ini, Act)
         val horasTranscurridas = duration.toHours()
+        val minutosTranscurridos = duration.toMinutes()
+
+        // cada 1 unidad de tiempo (1 minuto, 1 hora) 0,25 GinTonic, es decir,
+        // en 4 unidades temporales se descarta 1 gintonic.
+        // en 3 unidades temporales se descarta 1 cerveza de tercio.
         (activity as MainActivity).miViewModel.progreso.value?.let {
-            for(bebida in (activity as MainActivity).miViewModel.progreso.value){
-                bebida.consumido -= (horasTranscurridas * ( 0.5f - ( 1.0f / bebida.casa ))).toInt()
+            (activity as MainActivity).miViewModel.progreso.value.forEach { bebida ->
+                var resultado = bebida.consumido - (minutosTranscurridos * ( 0.5f - ( 1.0f / bebida.casa ))).toInt()
+                if (resultado > 0){
+                    bebida.consumido = resultado
+                } else {
+                    bebida.consumido = 0
+                }
+                (activity as MainActivity).miViewModel.modificar(bebida)
             }
         }
     }

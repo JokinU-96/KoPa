@@ -35,12 +35,25 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val datos: SharedPreferences = (activity as MainActivity).getSharedPreferences("datos", Context.MODE_PRIVATE)
         val editor = datos.edit()
 
-        binding.etNombre.setText((activity as MainActivity).miViewModel.usuario?.nombre.toString())
-        binding.etApellidos.setText((activity as MainActivity).miViewModel.usuario?.apellidos.toString())
-        binding.etEdad.setText((activity as MainActivity).miViewModel.usuario?.edad.toString())
+        (activity as MainActivity).miViewModel.usuario?.let {
+            binding.etNombre.setText(it.nombre.toString())
+            binding.etApellidos.setText(it.apellidos.toString())
+            if (it.edad == -1){
+                //nada
+            } else {
+                binding.etEdad.setText(it.edad.toString())
+            }
+        }
+
+        if ((activity as MainActivity).miViewModel.usuario == null){
+            binding.etNombre.setText("")
+            binding.etApellidos.setText("")
+            binding.etEdad.setText("")
+        }
 
         //Acciones a la hora de pulsar sobre el botón de iniciar sesión.
         binding.btnIniciarSesion.setOnClickListener{
@@ -73,7 +86,7 @@ class LogInFragment : Fragment() {
                         findNavController().navigate(R.id.action_logInFragment_to_dataFragment)
 
                     } else {
-                        Toast.makeText(context, "Debes ser mayor de edad para poder comprarte un coche en este concesionario.", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "Debes ser mayor de edad para poder entrar a KoPa.", Toast.LENGTH_SHORT)
                             .show()
                     }
                 }

@@ -5,6 +5,5 @@ import com.example.kopa.bbdd.Bebida
 class Usuario (
     var nombre : String,
     var apellidos : String,
-    var edad : Int,
-    var bebidas : MutableList<Bebida> = mutableListOf()
+    var edad : Int
 )
