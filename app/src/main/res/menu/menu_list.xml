@@ -4,5 +4,6 @@
 
     <item
         android:id="@+id/anyadirBebida"
-        android:title="Nueva bebida" />
+        android:title="Nueva bebida"
+        app:showAsAction="always"/>
 </menu>

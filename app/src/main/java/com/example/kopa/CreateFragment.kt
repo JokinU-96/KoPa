@@ -43,7 +43,7 @@ class CreateFragment : Fragment() {
         (activity as MainActivity).spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedItem = (activity as MainActivity).spinnerItems[position]
-                color = selectedItem
+                color = selectedItem.split(":")[1]
                 val colorArgb = Color.parseColor(color)
                 binding.spinner.background = ColorDrawable(colorArgb)
                 Toast.makeText(context, "Selected item: $selectedItem", Toast.LENGTH_SHORT).show()
@@ -74,7 +74,7 @@ class CreateFragment : Fragment() {
                         aviso = binding.etAviso.text.toString().toInt(),
                         muerte = binding.etMuerte.text.toString().toInt(),
                         color = color,
-                        consumido = 0
+                        consumido = 0.0
                     )
                     (activity as MainActivity).miViewModel.insertar(BebidaAnyadida)
                     Toast.makeText(context, "La bebida ha sido introducida correctamente en la base de datos.", Toast.LENGTH_SHORT).show()

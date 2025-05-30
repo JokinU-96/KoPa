@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.example.kopa.databinding.FragmentInfoBinding
 import com.example.kopa.bbdd.Bebida
+import java.time.LocalDateTime
 
 class InfoFragment : Fragment() {
     private var _binding: FragmentInfoBinding? = null
@@ -76,7 +77,7 @@ class InfoFragment : Fragment() {
 
                 binding.btnSumarBebida.setOnClickListener {
                     sumarProgreso(bebida)
-                    (activity as MainActivity).miViewModel.horaIni = (activity as MainActivity).miViewModel.crono
+                    (activity as MainActivity).miViewModel.horaIni = LocalDateTime.now().format((activity as MainActivity).miViewModel.formatter)
 
                 }
             }

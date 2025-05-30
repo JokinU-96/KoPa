@@ -26,9 +26,6 @@ class VM(private val miRepositorio : Repositorio):ViewModel() {
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
     @RequiresApi(Build.VERSION_CODES.O)
-    val crono = LocalDateTime.now().format(formatter).toString()
-
-    @RequiresApi(Build.VERSION_CODES.O)
     var horaIni : String = ""
 
     var avisos : MutableLiveData<MutableList<String>> = MutableLiveData()

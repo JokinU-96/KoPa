@@ -2,6 +2,7 @@ package com.example.kopa.recyclerView
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kopa.MainActivity
 import com.example.kopa.databinding.RecyclerviewProgresoBinding
 import com.example.kopa.bbdd.Bebida
+import kotlin.math.ceil
 
 class AdaptadorProgreso(var listaProgreso : List<Bebida>, val adapterOnClick : (Int) -> Unit): RecyclerView.Adapter<AdaptadorProgreso.ProgresoVH>() {
     inner class ProgresoVH(val binding: RecyclerviewProgresoBinding): RecyclerView.ViewHolder(binding.root){
@@ -17,7 +19,8 @@ class AdaptadorProgreso(var listaProgreso : List<Bebida>, val adapterOnClick : (
         init {
             binding.btnConsumo.setOnClickListener{
                 adapterOnClick(posicion)
-                binding.btnConsumo.text=listaProgreso[posicion].consumido.toString()
+                Log.d("Consumido Integer: ", ceil(listaProgreso[posicion].consumido).toInt().toString())
+                binding.btnConsumo.text = ceil(listaProgreso[posicion].consumido).toInt().toString()
             }
         }
     }
@@ -36,6 +39,6 @@ class AdaptadorProgreso(var listaProgreso : List<Bebida>, val adapterOnClick : (
         val colorArgb = Color.parseColor("${ listaProgreso[position].color }")
         holder.binding.rectangulo.background = ColorDrawable(colorArgb)
         holder.posicion = position
-        holder.binding.btnConsumo.text = "${listaProgreso[position].consumido}"
+        holder.binding.btnConsumo.text = ceil(listaProgreso[position].consumido).toInt().toString()
     }
 }

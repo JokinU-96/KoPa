@@ -23,25 +23,25 @@
     <string name="guardar">Guardar</string>
 
     <string-array name="spinner_items">
-        <item>#ffc107</item>
-        <item>#6f4e37</item>
-        <item>#b5651d</item>
-        <item>#d4af37</item>
-        <item>#a32f3f</item>
-        <item>#f5f5dc</item>
-        <item>#800020</item>
-        <item>#add8e6</item>
-        <item>#8b0000</item>
-        <item>#f0e68c</item>
-        <item>#4682b4</item>
-        <item>#c0c0c0</item>
-        <item>#ffd700</item>
-        <item>#8b4513</item>
-        <item>#da70d6</item>
-        <item>#fffafa</item>
-        <item>#2e8b57</item>
-        <item>#ff4500</item>
-        <item>#9370db</item>
-        <item>#a52a2a</item>
+        <item>Refresco de Naranja:#ffc107</item>
+        <item>Café:#6f4e37</item>
+        <item>Té:#b5651d</item>
+        <item>Champán:#d4af37</item>
+        <item>Vino Tinto:#a32f3f</item>
+        <item>Leche de Avena:#f5f5dc</item>
+        <item>Vino Tinto Oscuro:#800020</item>
+        <item>Agua:#add8e6</item>
+        <item>Zumo de Cereza:#8b0000</item>
+        <item>Limonada:#f0e68c</item>
+        <item>Agua Mineral:#4682b4</item>
+        <item>Agua Pura:#c0c0c0</item>
+        <item>Bebida Dorada:#ffd700</item>
+        <item>Café Oscuro:#8b4513</item>
+        <item>Cóctel de Uva:#da70d6</item>
+        <item>Leche:#fffafa</item>
+        <item>Té Verde:#2e8b57</item>
+        <item>Zumo de Naranja Sanguina:#ff4500</item>
+        <item>Zumo de Uva:#9370db</item>
+        <item>Refresco de Cola:#a52a2a</item>
     </string-array>
 </resources>

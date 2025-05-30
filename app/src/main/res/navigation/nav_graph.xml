@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/dataFragment"
         android:name="com.example.kopa.DataFragment"
-        android:label="fragment_data"
+        android:label="Escritorio"
         tools:layout="@layout/fragment_data" >
         <action
             android:id="@+id/action_dataFragment_to_listFragment"
@@ -16,7 +16,7 @@
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.example.kopa.InfoFragment"
-        android:label="fragment_info"
+        android:label="Bebida"
         tools:layout="@layout/fragment_info" >
         <action
             android:id="@+id/action_infoFragment_to_listFragment"
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.example.kopa.LogInFragment"
-        android:label="fragment_login"
+        android:label="Login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_logInFragment_to_dataFragment"
@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.kopa.ListFragment"
-        android:label="ListFragment" >
+        android:label="Bebidas">
         <action
             android:id="@+id/action_listFragment_to_infoFragment"
             app:destination="@id/infoFragment" />

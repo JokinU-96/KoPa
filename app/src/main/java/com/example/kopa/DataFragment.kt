@@ -60,8 +60,6 @@ class DataFragment : Fragment() {
         //Cargo las bebidas consumidas cada vez que entro en esta pantalla.
         (activity as MainActivity).miViewModel.mostrarBebidasConsumidas()
 
-        cargarLogicaApp()
-
         (activity as MainActivity).miViewModel.progreso.observe(activity as MainActivity){
             //Compruebo que no sea nulo para empezar a jugar con los elementos en el progreso.
             it?.let {
@@ -87,9 +85,7 @@ class DataFragment : Fragment() {
                 binding.rvProgreso.adapter= AdaptadorProgreso(it) { posicion ->
 
                     Log.d("Bebida Actual: ",(activity as MainActivity).miViewModel.progreso.value?.get(posicion)?.nombre ?:"null")
-
-
-
+                    
                     (activity as MainActivity).miViewModel.progreso.value?.get(posicion)?.let{ bebidaActual->
 
                         Log.d("Bebida Actual post Let: ",bebidaActual.nombre)
@@ -104,6 +100,8 @@ class DataFragment : Fragment() {
                         actualizarAvisos()
 
                     }
+                    //Dónde cargo la lógica y cómo hago para que no se carge constantemente. Cuando se carga una vez, hay que actualizar la hora.
+                    cargarLogicaApp()
                 }
             }
 
@@ -144,12 +142,13 @@ class DataFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun cargarLogicaApp() {
+        Log.d("Carga", "Cargando la lógica de la aplicación.")
         /*Pautas:
         - Temporales:
             . Cada hora que pase, el consumo se reduce en la inversa de una copa dividida entre las copas necesarias para volver a casa. (Ej. [1 - (1 / 8)] en el caso de la Cerveza)
          */
         // 3. Parsear los Strings a objetos LocalDateTime
-        val Act = LocalDateTime.parse((activity as MainActivity).miViewModel.crono, (activity as MainActivity).miViewModel.formatter)
+        val Act = LocalDateTime.now()
         val Ini = LocalDateTime.parse((activity as MainActivity).miViewModel.horaIni, (activity as MainActivity).miViewModel.formatter)
 
         // 4. Calcular la duración entre las dos fechas
@@ -161,30 +160,36 @@ class DataFragment : Fragment() {
         // en 4 unidades temporales se descarta 1 gintonic.
         // en 3 unidades temporales se descarta 1 cerveza de tercio.
         (activity as MainActivity).miViewModel.progreso.value?.let {
+            Log.d("dataf", "Cargando lógica in progreso: tiempo transcurrido: ${minutosTranscurridos}")
             (activity as MainActivity).miViewModel.progreso.value.forEach { bebida ->
-                var resultado = bebida.consumido - (minutosTranscurridos * ( 0.5f - ( 1.0f / bebida.casa ))).toInt()
+                var resultado = bebida.consumido - (minutosTranscurridos * ( 0.5f - ( 1.0f / bebida.casa )))
                 if (resultado > 0){
                     bebida.consumido = resultado
                 } else {
-                    bebida.consumido = 0
+                    bebida.consumido = 0.0
                 }
+                Log.d("consumido", "La bebida ${bebida.nombre} ha sido consumida, consumo total con descuento temporal: ${bebida.consumido}")
                 (activity as MainActivity).miViewModel.modificar(bebida)
             }
+        //Como se ha modificado el consumo respecto a la hora de consumo de la copa anterior.
+        // Hay que resetear la hora y da comienzo al cronómetro que calculará la resta por tiempo en el consumo.
+            (activity as MainActivity).miViewModel.horaIni = LocalDateTime.now().format((activity as MainActivity).miViewModel.formatter).toString()
+            Log.d("Action", "Hora actualizada. ${(activity as MainActivity).miViewModel.horaIni}")
         }
     }
 
     private fun ejecutarLogicaAvisos(bebidaActual: Bebida) {
         //Hago las condicionales para que vaya creando avisos.
-        if (bebidaActual.consumido == bebidaActual.vaso){
+        if (bebidaActual.consumido.toInt() == bebidaActual.vaso){
             (activity as MainActivity).miViewModel.avisos.value.add("Vaso")
             Log.d("avisos","Vaso")
-        } else if (bebidaActual.consumido == bebidaActual.comida){
+        } else if (bebidaActual.consumido.toInt() == bebidaActual.comida){
             (activity as MainActivity).miViewModel.avisos.value.add("Comida")
-        } else if (bebidaActual.consumido == bebidaActual.casa){
+        } else if (bebidaActual.consumido.toInt() == bebidaActual.casa){
             (activity as MainActivity).miViewModel.avisos.value.add("Casa")
-        } else if (bebidaActual.consumido == bebidaActual.aviso){
+        } else if (bebidaActual.consumido.toInt() == bebidaActual.aviso){
             (activity as MainActivity).miViewModel.avisos.value.add("Deja ya de beber")
-        } else if (bebidaActual.consumido == bebidaActual.muerte){
+        } else if (bebidaActual.consumido.toInt() == bebidaActual.muerte){
             (activity as MainActivity).miViewModel.avisos.value.add("Has muerto")
 
         }

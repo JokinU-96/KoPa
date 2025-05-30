@@ -13,10 +13,10 @@ interface BebidaDAO {
     @Query("SELECT * FROM bebidas ORDER BY nombre ASC")
     fun mostrarBebidas(): Flow<List<Bebida>>
 
-    @Query("SELECT * FROM bebidas WHERE consumido > 0")
+    @Query("SELECT * FROM bebidas WHERE consumido > 0.0")
     fun mostrarBebidasConsumidas(): Flow<List<Bebida>>
 
-    @Query("UPDATE bebidas SET consumido = 0 WHERE consumido > 0")
+    @Query("UPDATE bebidas SET consumido = 0 WHERE consumido > 0.0")
     suspend fun resetearConsumo()
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

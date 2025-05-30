@@ -27,5 +27,5 @@ data class Bebida (
     @NonNull @ColumnInfo (name = "aviso") var aviso : Int = 0,
     @NonNull @ColumnInfo (name = "muerte") var muerte : Int = 0,
     @NonNull @ColumnInfo (name = "color") var color : String = "",
-    @NonNull @ColumnInfo (name = "consumido") var consumido : Int = 0
+    @NonNull @ColumnInfo (name = "consumido") var consumido : Double = 0.0
 ){}
