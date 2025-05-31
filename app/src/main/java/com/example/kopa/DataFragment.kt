@@ -154,15 +154,15 @@ class DataFragment : Fragment() {
         // 4. Calcular la duración entre las dos fechas
         val duration = Duration.between(Ini, Act)
         val horasTranscurridas = duration.toHours()
-        val minutosTranscurridos = duration.toMinutes()
+        //val minutosTranscurridos = duration.toMinutes()
 
         // cada 1 unidad de tiempo (1 minuto, 1 hora) 0,25 GinTonic, es decir,
         // en 4 unidades temporales se descarta 1 gintonic.
         // en 3 unidades temporales se descarta 1 cerveza de tercio.
         (activity as MainActivity).miViewModel.progreso.value?.let {
-            Log.d("dataf", "Cargando lógica in progreso: tiempo transcurrido: ${minutosTranscurridos}")
+            Log.d("dataf", "Cargando lógica in progreso: tiempo transcurrido: ${horasTranscurridas}")
             (activity as MainActivity).miViewModel.progreso.value.forEach { bebida ->
-                var resultado = bebida.consumido - (minutosTranscurridos * ( 0.5f - ( 1.0f / bebida.casa )))
+                var resultado = bebida.consumido - (horasTranscurridas * ( 0.5f - ( 1.0f / bebida.casa )))
                 if (resultado > 0){
                     bebida.consumido = resultado
                 } else {
@@ -181,7 +181,7 @@ class DataFragment : Fragment() {
     private fun ejecutarLogicaAvisos(bebidaActual: Bebida) {
         //Hago las condicionales para que vaya creando avisos.
         if (bebidaActual.consumido.toInt() == bebidaActual.vaso){
-            (activity as MainActivity).miViewModel.avisos.value.add("Vaso")
+            (activity as MainActivity).miViewModel.avisos.value.add("Vaso de Agua")
             Log.d("avisos","Vaso")
         } else if (bebidaActual.consumido.toInt() == bebidaActual.comida){
             (activity as MainActivity).miViewModel.avisos.value.add("Comida")

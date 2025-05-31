@@ -15,12 +15,15 @@
     <string name="comida">Comida</string>
     <string name="nombre">Nombre:</string>
     <string name="contrase_a">Contraseña</string>
-    <string name="iniciar_sesi_n">Iniciar sesión</string>
+    <string name="iniciar_sesi_n">Iniciar Sesión</string>
     <string name="ver">Ver</string>
     <string name="aviso">Aviso</string>
 
     <string name="spinner_prompt">Selecciona un elemento</string>
     <string name="guardar">Guardar</string>
+    <string name="apellido">Apellido:</string>
+    <string name="edad">Edad:</string>
+    <string name="volumen">Volumen</string>
 
     <string-array name="spinner_items">
         <item>Refresco de Naranja:#ffc107</item>

@@ -14,11 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/inter_24pt_black"
         android:hint="Nombre"
+        android:textColor="@color/fondo"
         android:textAlignment="center"
-        android:textSize="26sp" />
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/btnConsumo"
@@ -27,10 +29,10 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_weight="1"
-        android:backgroundTint="@color/red"
-        android:fontFamily="sans-serif-black"
+        android:backgroundTint="@color/botones"
+        android:fontFamily="@font/inter_24pt_black"
         android:text="1"
-        android:textColor="@color/white"
-        android:textSize="34sp"/>
+        android:textColor="@color/fondo"
+        android:textSize="34sp" />
 
 </LinearLayout>

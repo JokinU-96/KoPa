@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="@color/yellow"
+    android:background="@color/fondo"
     android:padding="10dp">
 
     <TextView
@@ -15,8 +15,9 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:layout_weight="1"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/inter_24pt_bold"
         android:hint="Nombre"
+        android:textColor="@color/fondo"
         android:textSize="34sp" />
 
     <Button
@@ -24,11 +25,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
         android:layout_marginEnd="15dp"
-        android:backgroundTint="#FFFFFF"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/botones"
+        android:fontFamily="@font/inter_24pt_black"
         android:text="@string/ver"
-        android:textColor="#4B4B4B"
+        android:textColor="@color/fondo"
         android:textSize="34sp" />
 
 </LinearLayout>

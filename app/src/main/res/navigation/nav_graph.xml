@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/createFragment"
         android:name="com.example.kopa.CreateFragment"
-        android:label="fragment_create"
+        android:label="Nueva bebida"
         tools:layout="@layout/fragment_create" >
         <action
             android:id="@+id/action_createFragment_to_listFragment"
