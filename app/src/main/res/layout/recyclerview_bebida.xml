@@ -24,12 +24,30 @@
         android:id="@+id/btnVerBebida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="30dp"
         android:backgroundTint="@color/botones"
         android:fontFamily="@font/inter_24pt_black"
+        android:paddingBottom="10dp"
         android:text="@string/ver"
+        android:textColor="@color/fondo"
+        android:textSize="34sp" />
+
+    <Button
+        android:id="@+id/btnEliminarBebida"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/titulos"
+        android:fontFamily="@font/inter_24pt_black"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:text="x"
         android:textColor="@color/fondo"
         android:textSize="34sp" />
 

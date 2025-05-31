@@ -1,6 +1,7 @@
 package com.example.kopa
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -41,7 +42,15 @@ class ListFragment : Fragment() {
         //Alimento mis recycler views.
         (activity as MainActivity).miViewModel.bebidas.observe(activity as MainActivity){
             binding.rvbebidas.layoutManager = LinearLayoutManager(activity)
-            binding.rvbebidas.adapter=AdaptadorBebidas(it)
+            binding.rvbebidas.adapter=AdaptadorBebidas(it) { posicion ->
+
+                (activity as MainActivity).miViewModel.bebidas.value?.get(posicion)?.let{ bebidaActual ->
+                    Log.d("Bebida actual para ser eliminada: ", bebidaActual.nombre)
+
+                    (activity as MainActivity).miViewModel.borrar(bebidaActual)
+
+                }
+            }
         }
 
 

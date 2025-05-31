@@ -11,7 +11,7 @@ import com.example.kopa.R
 import com.example.kopa.databinding.RecyclerviewBebidaBinding
 import com.example.kopa.bbdd.Bebida
 
-class AdaptadorBebidas(var listaDEbebidas: List<Bebida>):RecyclerView.Adapter<AdaptadorBebidas.BebidaVH>() {
+class AdaptadorBebidas(var listaDEbebidas: List<Bebida>, val adapterOnClick : (Int) -> Unit):RecyclerView.Adapter<AdaptadorBebidas.BebidaVH>() {
     inner class BebidaVH(val binding: RecyclerviewBebidaBinding): RecyclerView.ViewHolder(binding.root){
         var posicion: Int = 0
         init {
@@ -21,6 +21,10 @@ class AdaptadorBebidas(var listaDEbebidas: List<Bebida>):RecyclerView.Adapter<Ad
                 val miBundle = bundleOf("posicion" to posicion)
                 //Traslado al usuario a los detalles de cada bebida e incorporo el bundle.
                 binding.btnVerBebida.findNavController().navigate(R.id.action_listFragment_to_infoFragment, miBundle)
+            }
+
+            binding.btnEliminarBebida.setOnClickListener {
+                adapterOnClick(posicion)
             }
         }
     }
